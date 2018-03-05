@@ -3,10 +3,6 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-import org.hibernate.annotations.Proxy;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
@@ -20,7 +16,6 @@ import java.util.Set;
  */
 @Entity
 @NamedQuery(name="Student_Course_Enrolment.findAll", query="SELECT s FROM Student_Course_Enrolment s")
-@Proxy(lazy=false)
 public class Student_Course_Enrolment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,12 +36,12 @@ public class Student_Course_Enrolment implements Serializable {
 	private String otherDetails;
 
 	//bi-directional many-to-one association to Student
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="student_id")
 	private Student student;
 
 	//bi-directional many-to-one association to Cours
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="course_id")
 	private Cours cours;
 
@@ -94,7 +89,8 @@ public class Student_Course_Enrolment implements Serializable {
 	public void setOtherDetails(String otherDetails) {
 		this.otherDetails = otherDetails;
 	}
-
+	
+	
 	public Student getStudent() {
 		return this.student;
 	}
@@ -102,7 +98,7 @@ public class Student_Course_Enrolment implements Serializable {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-
+	
 	public Cours getCours() {
 		return this.cours;
 	}
@@ -110,6 +106,7 @@ public class Student_Course_Enrolment implements Serializable {
 	public void setCours(Cours cours) {
 		this.cours = cours;
 	}
+//	@JsonBackReference
 	@JsonIgnore
 	public Set<Student_Tests_Taken> getStudentTestsTaken() {
 		return studentTestsTaken;

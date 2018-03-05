@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import net.minidev.json.annotate.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -77,6 +80,7 @@ public class Student_Tests_Taken implements Serializable {
 		this.testResult = testResult;
 	}
 	@Transient
+	
 	public Student_Course_Enrolment getStudentCourseEnrolment() {
 		return getPrimaryKey().getStudentCourseEnrolment();
 	}

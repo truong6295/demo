@@ -19,7 +19,7 @@ import com.example.demo.service.CourseService;
 @RequestMapping("/api")
 public class CourseController {
 	@Autowired
-    private CourseService courseService;
+    CourseService courseService;
     //view all
     @RequestMapping(value = "/course/", method = RequestMethod.GET)
     public ResponseEntity<List<Cours>> listAllCourse() {
@@ -39,27 +39,11 @@ public class CourseController {
     @RequestMapping(value = "/course/",method = RequestMethod.POST)
     public ResponseEntity<?> courseSubjectcourseAuthorsAndTutor(String courseDescription,String courseName,
     		String otherDetails,String subjectId,String courseAuthorsAndTutorId, UriComponentsBuilder ucBuilder){
-        Cours courses=courseService.add(courseDescription, courseName, otherDetails,
-        		Integer.parseInt(subjectId), Integer.parseInt(courseAuthorsAndTutorId));
+        Cours courses=courseService.add(courseDescription, courseName, otherDetails, Integer.parseInt(subjectId), Integer.parseInt(courseAuthorsAndTutorId));
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/course/{id}").buildAndExpand(courses.getCourseId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     //update
-    @RequestMapping(value = "/course/", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateCourse(String courseId ,String courseDescription,String courseName,
-    		String otherDetails,String subjectId,String courseAuthorsAndTutorId){
-        Cours currentCourse = courseService.update(Integer.parseInt(courseId), courseDescription, 
-        		courseName, otherDetails, Integer.parseInt(subjectId), Integer.parseInt(courseAuthorsAndTutorId));
-        return new ResponseEntity<Cours>(currentCourse, HttpStatus.OK);
-    }
-    //delete
-    @RequestMapping(value = "/course/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteCourse(@PathVariable("id") int courseId) {
-        if(courseService.delete(courseId)) {
-        	return new ResponseEntity<Cours>(HttpStatus.NO_CONTENT);
-        }
-        else
-        	return new ResponseEntity("loi xoa.student voi id {} khong co.",HttpStatus.NOT_FOUND);
-    }
+    
 }

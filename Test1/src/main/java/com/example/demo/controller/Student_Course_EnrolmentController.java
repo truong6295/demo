@@ -26,6 +26,25 @@ public class Student_Course_EnrolmentController {
 	@Autowired
 	Student_Course_EnrolmentRepository studentCourseEnrolmentRepository;
 	
+	/*@RequestMapping(value="/studentCourseEnrolment/", method= RequestMethod.GET )
+	public ResponseEntity<List<Student_Course_Enrolment>> listAllStudent() {
+        List<Student_Course_Enrolment> studentCourseEnrolments = studentCourseEnrolmentRepository.findAll();
+        if (studentCourseEnrolments.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Student_Course_Enrolment>>(studentCourseEnrolments, HttpStatus.OK);
+    }*/
+	//creat
+    /*@RequestMapping(value = "/student/", method = RequestMethod.POST)
+    public ResponseEntity<?> studentUser(@RequestBody Student students, UriComponentsBuilder ucBuilder) {
+        logger.info("tao student : {}", students);
+        
+        studentRepository.save(students);
+ 
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/student/{id}").buildAndExpand(students.getStudentId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }*/
 	
 	
 }

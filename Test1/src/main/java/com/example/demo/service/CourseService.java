@@ -27,8 +27,8 @@ public class CourseService {
 		return null;	
 	}
 	// update
-	public Cours update(int id,String courseDescription,String courseName,String otherDetails,int subjectId,int courseAuthorsAndTutorId) {
-		Cours course=new Cours(courseDescription, courseName, otherDetails, subjectRepository.getOne(subjectId), courseAuthorsAndTutorRepository.getOne(courseAuthorsAndTutorId));
+	public Cours update(int id,String courseDescription,String courseName,String otherDetails,Subject subject,Course_Authors_and_Tutor courseAuthorsAndTutor) {
+		Cours course=new Cours(courseDescription, courseName, otherDetails, subject, courseAuthorsAndTutor);
 		course.setCourseId(id);
 		if(courseRepository.save(course)!=null)
 			return course;
